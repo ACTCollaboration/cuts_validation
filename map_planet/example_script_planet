@@ -1,0 +1,11 @@
+#!/bin/bash
+
+TAG=run01
+NTASKS=10
+OUTDIR=/path/to/output/dir/$TAG
+MAPDATA=/path/to/mapdata
+
+mpirun -n ${NTASKS} python ${ANADIR}/map_planet.py Uranus ${MAPDATA}/area/obj_zoom2eq.fits "s17,uranus,night" $OUTDIR --filedb ${MAPDATA}/s17_subsetv5/filedb.txt --dataset s17_subsetv5 --equator
+
+mpirun -n ${NTASKS} python plot_summary.py ${OUTDIR}
+

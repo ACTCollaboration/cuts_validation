@@ -1,0 +1,18 @@
+p = /scratch/gpfs/yilung/depot/SelectedTODs
+
+{p}/pa4_f150_s17_c11_v4/selectedTODs_wide_01h_n.txt		s17 pa4 :f150 cmb wide_01h_n
+{p}/pa5_f150_s17_c11_v2/selectedTODs_wide_01h_n.txt		s17 pa5 :f150 cmb wide_01h_n
+{p}/pa6_f150_s17_c11_v2/selectedTODs_wide_01h_n.txt		s17 pa6 :f150 cmb wide_01h_n
+
+{p}/pa4_f220_s17_c11_v2/selectedTODs_wide_01h_n.txt		s17 pa4 :f220 cmb wide_01h_n
+{p}/pa5_f090_s17_c11_v2/selectedTODs_wide_01h_n.txt		s17 pa5 :f090 cmb wide_01h_n
+{p}/pa6_f090_s17_c11_v2/selectedTODs_wide_01h_n.txt		s17 pa6 :f090 cmb wide_01h_n
+
+
+{p}/pa4_f150_s17_c11_v2/selectedTODs_uranus.txt			s17 pa4 :f150 uranus
+{p}/pa5_f150_s17_c11_v2/selectedTODs_uranus.txt			s17 pa5 :f150 uranus
+{p}/pa6_f150_s17_c11_v2/selectedTODs_uranus.txt			s17 pa6 :f150 uranus
+
+{p}/pa4_f220_s17_c11_v2/selectedTODs_uranus.txt			s17 pa4 :f220 uranus
+{p}/pa5_f090_s17_c11_v2/selectedTODs_uranus.txt			s17 pa5 :f090 uranus
+{p}/pa6_f090_s17_c11_v2/selectedTODs_uranus.txt			s17 pa6 :f090 uranus

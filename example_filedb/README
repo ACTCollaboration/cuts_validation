@@ -1,0 +1,5 @@
+To create the todinfo.hdf file that is used by enki for the "s17_subset" dataset, run the following:
+
+>> mpirun -n 10 python /path/to/tenki/build_todinfo.py todinfo.txt "s17" /path/to/s17_subset/todinfo.hdf --filedb /path/to/s17_subset/filedb.txt --dataset s17_subset
+
+Note that this is assuming we are working on the tiger cluster.

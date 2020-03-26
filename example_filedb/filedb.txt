@@ -1,0 +1,54 @@
+mhasse = "/scratch/gpfs/snaess/actpol/depot/mhasse"
+shared = "/scratch/gpfs/snaess/actpol/depot/shared"
+skn    = "/scratch/gpfs/snaess/actpol/depot/sigurdkn"
+loic   = "/scratch/gpfs/snaess/actpol/depot/lmaurin"
+patty  = "/scratch/gpfs/snaess/actpol/depot/spho"
+marius = "/scratch/gpfs/snaess/actpol/depot/mlungu"
+yilun  = "/scratch/gpfs/yilung/depot"
+
+catalog   = "{mhasse}/mhasse1/ObsCatalog/catalog.fits"
+tod       = "/scratch/gpfs/snaess/actpol/tod/season{sidx}/merlin/{t5}/{id}.zip"
+
+if   pa == 4:         ctag = "v4"
+elif freq == "f150":  ctag = "v6"
+elif freq == "f090":  ctag = "v8"
+
+if pa == 4 and freq == "f150":	ctag, ptag = "v4", "v3"
+else: 	       	       		ctag, ptag = "v2", "v2"
+
+cut_basic = "{yilun}/TODCuts/pa{pa}_{freq}_s17_c11_{ptag}_partial/{t5}/{id}.cuts"
+cut_noiseest = cut_basic
+cut_quality  = "{yilun}/TODCuts/pa{pa}_{freq}_s17_c11_{ctag}/{t5}/{id}.cuts"
+cut = {"type":"union", "subs":[cut_quality, "{skn}/sidelobe_cut/s17v5_20190301_pa{pa}_{freq}_sidelobe_cut.hdf:cuts"]}
+
+gain         = "{yilun}/Calibration/pa{pa}_{freq}_s17_c11_{ctag}/{t5}/{id}.cal"
+
+gain_mode       = "mce"
+gain_correction = "{shared}/TODAbsCal/abscal_190126.h5/abscal"
+if season == 16: tconst = "{patty}/2016/TimeConstantsperTOD_181102/pa{pa}/{t5}/{id}.tau"
+if season == 17: tconst = "{patty}/2017/TimeConstantsperTOD_181027/pa{pa}/{t5}/{id}.tau"
+if season == 16: point_template = "{shared}/RelativeOffsets/template_ar{pa}_s16_170131.txt"
+if season == 17: point_template = "{shared}/RelativeOffsets/template_ar{pa}_170519.txt"
+if season == 16: point_offsets = "{shared}/TODOffsets/tod_offsets_171101.txt"
+if season == 17: point_offsets = "{shared}/TODOffsets/tod_offsets_2017_180526.txt"
+if pa == 4: polangle = "{mhasse}/shared/PolAngles/polangle_ar{pa}_2016_170119.txt"
+else:       polangle = "{mhasse}/shared/PolAngles/polangle_ar{pa}_2017_170909.txt"
+
+array_info = "{mhasse}/shared/ArrayData/{syear}/ar{pa}/default.fits"
+site       = "{skn}/site.txt"
+tag_defs   = "{skn}/tags/tags_ar{pa}.txt"
+
+hwp_epochs = "{mhasse}/shared/HWPTimes/latest.txt"
+hwp_format = "tod"
+
+pwv         =  "{skn}/apex/radiometer/{Uyear}-{Umonth}-{Uday}_radiometer.log.gz"
+temperature =  "{skn}/apex/temperature/{Uyear}-{Umonth}-{Uday}_temperature.log.gz"
+wind_speed  =  "{skn}/apex/windspeed/{Uyear}-{Umonth}-{Uday}_windspeed.log.gz"
+wind_dir    =  "{skn}/apex/winddirection/{Uyear}-{Umonth}-{Uday}_winddirection.log.gz"
+
+buddies    = "{skn}/buddies/sidelobes_dummy.txt"
+spikes     = "{skn}/spikes/spikes_ar2_2014_150402.txt"
+beam       = "{marius}/Beams/190504/b20190504_s17_pa{pa}_{freq}_nohwp_night_beam_profile_instant.txt"
+
+if pa == 4 and freq == "f150": pointsrcs  = "{skn}/pointsrcs/dummy.txt"
+else: pointsrcs  = "{skn}/pointsrcs/srcs_fit_s17_pa{pa}_{freq}_20190813.fits"
