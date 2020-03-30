@@ -65,7 +65,7 @@ def allocate_output(area):
     cutmap : (1, ny, nx) enmap
     '''
 
-    shape, wcs = enmap.read_map_geometry(args.area)
+    shape, wcs = enmap.read_map_geometry(area)
     hitmap = enmap.zeros((1,)+shape[-2:], wcs, dtype)
     cutmap = hitmap * 0
 
