@@ -11,6 +11,8 @@ from enlib import config, pmat, mpi, errors, gapfill, enmap, bench, enplot
 from enlib import fft, array_ops, scanutils
 from enact import filedb, actscan, actdata, cuts, nmat_measure
 
+try: xrange
+except: xrange = range
 opj = os.path.join
 
 config.set("pmat_cut_type",  "full")
@@ -193,7 +195,7 @@ for ind in range(comm.rank, len(ids), comm.size):
         idiv = array_ops.eigpow(div, -1, axes=[0,1], lim=1e-5, fallback="scalar")
         map  = enmap.map_mul(idiv, rhs)
     # Estimate central amplitude
-    c = np.array(map.shape[-2:])/2
+    c = np.array(map.shape[-2:])//2
     crad  = 50
     mcent = map[:,c[0]-crad:c[0]+crad,c[1]-crad:c[1]+crad]
     mcent = enmap.downgrade(mcent, 4)
