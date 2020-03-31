@@ -1,7 +1,11 @@
+#!/usr/bin/env python
 '''
-Produce maps of the cuts and hits for the selected TODs. 
+Produce maps of the cuts and hits for the selected TODs.
 Mostly taken from map_cuts.py script by Sigurd.
 '''
+
+from __future__ import print_function
+
 import numpy as np
 import os
 import sys
@@ -53,7 +57,7 @@ def write_scans(outdir, filelist):
                 f.write("{}\n".format(idx))
 
 def allocate_output(area):
-    '''    
+    '''
     Parameters
     ----------
     area : str
@@ -102,8 +106,8 @@ def map_cuts(entry, data, hitmap, cutmap, keep_buffer=False,
     keep_buffer : bool, optional
         Do not remove the 200 sample buffers before and after cuts.
     common_frac : float, optional
-        Do not consider cuts that are at least common to this 
-        fraction of detectors. 
+        Do not consider cuts that are at least common to this
+        fraction of detectors.
     '''
 
     scan = actscan.ACTScan(entry, d=data)
@@ -130,7 +134,7 @@ def remove_common(cut, frac=0.5):
     cut : Sampcut instance
     frac : float, optional
         Remove cuts common to at least this fraction of detectors.
-    
+
     Returns
     -------
     cuts : Sampcut instance
@@ -140,7 +144,7 @@ def remove_common(cut, frac=0.5):
     samp_mask = np.sum(cut.to_mask(), 0) > cut.ndet * frac
     all_cut = sampcut.from_mask(samp_mask[None])
     cut = ~(~cut * all_cut)
-    
+
     return cut
 
 def remove_buffer(cut):
@@ -156,15 +160,15 @@ def remove_buffer(cut):
     cut : Sampcut instance
         Copy of input without buffer.
     '''
-    
+
     n = 200
     ranges = cut.ranges
     # Only select cuts larger than 2n.
     mask = (ranges[:,1] - ranges[:,0]) > 2 * n
-    
+
     ranges[mask,0] += n
     ranges[mask,1] -= n
-    
+
     return sampcut.Sampcut(ranges, cut.detmap, cut.nsamp)
 
 def pas_per_season(season):
@@ -248,7 +252,7 @@ if __name__ == '__main__':
                         default=False, dest='keep_sidelobe')
     parser.add_argument("--keep-buffer", action='store_true', default=False,
                         dest='keep_buffer')
-    parser.add_argument("--nocommon-fraction", type=float, default=0.5, 
+    parser.add_argument("--nocommon-fraction", type=float, default=0.5,
                         dest='nocommon')
 
     args = parser.parse_args()
@@ -264,7 +268,7 @@ if __name__ == '__main__':
     ids = filedb.scans[args.sel]
     id_dict = split_ids(ids)
 
-    for scan_key, scan_ids in id_dict.iteritems():
+    for scan_key, scan_ids in id_dict.items():
 
         outdir_sub = opj(outdir, scan_key)
         mkoutdir(outdir_sub)
@@ -292,7 +296,7 @@ if __name__ == '__main__':
 
             nocommon = None if args.nocommon == -1 else args.nocommon
 
-            map_cuts(entry, data, hitmap, cutmap, 
+            map_cuts(entry, data, hitmap, cutmap,
                      keep_buffer=args.keep_buffer,
                      nocommon_frac=nocommon)
 
@@ -305,4 +309,3 @@ if __name__ == '__main__':
             cutmap = hitmap - cutmap
             enmap.write_map(opj(outdir_sub, 'hits.fits'), hitmap[0])
             enmap.write_map(opj(outdir_sub, 'cuts.fits'), cutmap[0])
-

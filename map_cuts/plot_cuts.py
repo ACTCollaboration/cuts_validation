@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 import matplotlib
 matplotlib.use('agg')
 import matplotlib.pyplot as plt
@@ -32,7 +34,7 @@ if __name__ == '__main__':
             comm.Get_rank(), os.path.split(mapdir)[1]))
 
         hitmap = enmap.read_map(opj(mapdir, 'hits.fits'))
-        cutmap = enmap.read_map(opj(mapdir, 'cuts.fits'))        
+        cutmap = enmap.read_map(opj(mapdir, 'cuts.fits'))
         ratio = cutmap.copy()
         ratio[hitmap == 0] *= 0
         ratio[hitmap != 0] /= hitmap[hitmap != 0]
@@ -51,8 +53,3 @@ if __name__ == '__main__':
 
         plot = enplot.plot(ratio, min=0, max=args.range, **plot_opts)
         enplot.write(opj(mapdir, 'ratio'), plot)
-
-
-
-
-    
