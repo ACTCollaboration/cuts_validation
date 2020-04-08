@@ -10,7 +10,6 @@ import numpy as np
 import os
 import sys
 import pipes
-
 from mpi4py import MPI
 
 from enlib import config, utils, pmat, errors, sampcut

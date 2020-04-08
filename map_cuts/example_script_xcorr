@@ -1,0 +1,14 @@
+#!/bin/bash
+
+TAG=run01
+NTASKS=10
+SDIR=/path/to/cutsmaps
+MCMDIR=/path/to/mcmdir
+OUTDIR=/path/to/output/dir/$TAG
+MAPDATA=/path/to/mapdata
+
+mpirun -n ${NTASKS} python compute_xcorr.py ${SDIR} ${MCMDIR} ${OUTDIR} /path/to/signal_map_{freq}.fits --signal-map-scrfree /path/to/signal_scrfree_map_{freq}.fits
+
+mpirun -n ${NTASKS} python plot_xcorr.py ${OUTDIR} ${SDIR}/img_${TAG} --min-bin 2
+
+

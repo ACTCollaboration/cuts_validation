@@ -7,4 +7,4 @@ MAPDATA=/path/to/mapdata
 
 mpirun -n ${NTASKS} python map_cuts.py ${MAPDATA}/area/wide_01h_n.fits "s17,cmb" $OUTDIR --filedb ${MAPDATA}/s17_subsetv5/filedb.txt --dataset s17_subsetv5 --nocommon-fraction 0.3
 
-mpirun -n ${NTASKS} python plot_cuts.py ${OUTDIR} --range 0.01
+mpirun -n ${NTASKS} python plot_cuts.py ${OUTDIR} --range 0.01 --signal-map /path/to/for/instance/act_planck_s08_s18_cmb_{freq}_daynight_map.fits
